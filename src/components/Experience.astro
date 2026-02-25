@@ -1,13 +1,20 @@
 ---
 import { siteConfig } from "../config";
-const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
+import { getLabels, getContent, type Lang } from "../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = getLabels(lang);
+const c = getContent(lang);
+
+const hasExperience = c.experience && c.experience.length > 0;
 ---
 
 {hasExperience && (
   <section id="experience" class="py-12 md:py-16 bg-white">
     <div class="max-w-6xl mx-auto px-6 lg:px-8">
       <div class="mb-10 reveal-left">
-        <h2 class="text-3xl md:text-4xl font-bold" style={`color: ${siteConfig.accentColor}`}>Experience</h2>
+        <h2 class="text-3xl md:text-4xl font-bold" style={`color: ${siteConfig.accentColor}`}>{t.experience}</h2>
         <div class="w-16 h-1 mt-3 rounded-full" style={`background-color: ${siteConfig.highlightColor}`}></div>
       </div>
 
@@ -15,7 +22,7 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
       <div class="hidden md:block relative mb-8 reveal stagger-1">
         <div class="absolute top-4 left-0 right-0 h-0.5 timeline-line" style={`background-color: ${siteConfig.accentColor}30`}></div>
         <div class="flex justify-between">
-          {siteConfig.experience.map((exp, index) => (
+          {c.experience.map((exp, index) => (
             <div class="relative flex flex-col items-center" style="flex: 1">
               <div class="w-8 h-8 rounded-full flex items-center justify-center z-10" style={`background-color: ${siteConfig.highlightColor}`}>
                 <span class="text-white text-xs font-bold">{index + 1}</span>
@@ -33,7 +40,7 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
 
       <!-- Experience Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        {siteConfig.experience.map((exp, index) => (
+        {c.experience.map((exp, index) => (
           <div
             class={`reveal stagger-${index + 2} card-hover p-5 rounded-xl bg-gray-50`}
             style={`border: 1px solid ${siteConfig.accentColor}12`}

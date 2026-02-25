@@ -1,5 +1,11 @@
 ---
 import { siteConfig } from "../config";
+import { getLabels, getContent, type Lang } from "../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = getLabels(lang);
+const c = getContent(lang);
 ---
 
 <div class="w-full h-2 accent-bar-shimmer" style={`background: linear-gradient(90deg, ${siteConfig.accentColor} 0%, ${siteConfig.highlightColor} 50%, ${siteConfig.accentColor} 100%)`}></div>
@@ -10,7 +16,7 @@ import { siteConfig } from "../config";
       <!-- Brand -->
       <div class="reveal-left">
         <h3 class="text-xl font-bold text-white">{siteConfig.name}</h3>
-        <p class="text-sm mt-1 text-white/70">{siteConfig.title}</p>
+        <p class="text-sm mt-1 text-white/70">{c.title}</p>
       </div>
 
       <!-- Social Links -->
@@ -40,7 +46,7 @@ import { siteConfig } from "../config";
 
     <div class="mt-8 pt-6 border-t border-white/15 text-center reveal">
       <p class="text-xs text-white/50">
-        &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+        &copy; {new Date().getFullYear()} {siteConfig.name}. {t.allRights}
       </p>
     </div>
   </div>

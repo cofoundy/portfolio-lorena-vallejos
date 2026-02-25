@@ -1,5 +1,11 @@
 ---
 import { siteConfig } from "../config";
+import { getLabels, getContent, type Lang } from "../i18n";
+
+interface Props { lang: Lang; }
+const { lang } = Astro.props;
+const t = getLabels(lang);
+const c = getContent(lang);
 ---
 
 <section id="about" class="py-12 md:py-16 bg-white">
@@ -8,7 +14,7 @@ import { siteConfig } from "../config";
       <!-- Title -->
       <div class="lg:col-span-3 reveal-left">
         <h2 class="text-3xl md:text-4xl font-bold" style={`color: ${siteConfig.accentColor}`}>
-          About Me
+          {t.aboutMe}
         </h2>
         <div class="w-16 h-1 mt-3 rounded-full" style={`background-color: ${siteConfig.highlightColor}`}></div>
       </div>
@@ -16,7 +22,7 @@ import { siteConfig } from "../config";
       <!-- Bio -->
       <div class="lg:col-span-9 reveal stagger-1">
         <p class="text-base md:text-lg text-gray-700 leading-relaxed">
-          <Fragment set:html={siteConfig.aboutMe} />
+          <Fragment set:html={c.aboutMe} />
         </p>
       </div>
     </div>
@@ -24,10 +30,10 @@ import { siteConfig } from "../config";
     <!-- Skills -->
     <div class="mt-10 pt-8 border-t reveal stagger-2" style={`border-color: ${siteConfig.accentColor}15`}>
       <h3 class="text-sm font-semibold uppercase tracking-wider mb-4" style={`color: ${siteConfig.accentColor}`}>
-        Core Skills
+        {t.coreSkills}
       </h3>
       <div class="flex flex-wrap gap-2">
-        {siteConfig.skills.map((skill) => (
+        {c.skills.map((skill) => (
           <span
             class="skill-hover px-4 py-2 rounded-full text-sm font-medium cursor-default"
             style={`background-color: ${siteConfig.accentColor}08; color: ${siteConfig.accentColor}; border: 1px solid ${siteConfig.accentColor}25`}
